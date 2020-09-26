@@ -9,7 +9,6 @@ import { MiddlewareRegistry } from '../redux';
 import { parseURLParams } from '../util';
 
 import { SETTINGS_UPDATED } from './actionTypes';
-import { updateSettings } from './actions';
 import { handleCallIntegrationChange, handleCrashReportingChange } from './functions';
 
 /**
@@ -161,18 +160,10 @@ function _updateLocalParticipantFromUrl({ dispatch, getState }) {
     const localParticipant = getLocalParticipant(getState());
 
     if (localParticipant) {
-        const displayName = _.escape(urlDisplayName);
-        const email = _.escape(urlEmail);
-
         dispatch(participantUpdated({
             ...localParticipant,
-            email,
-            name: displayName
-        }));
-
-        dispatch(updateSettings({
-            displayName,
-            email
+            email: _.escape(urlEmail),
+            name: _.escape(urlDisplayName)
         }));
     }
 }

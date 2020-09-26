@@ -19,10 +19,11 @@ export default {
      */
     displayNameContainer: {
         alignSelf: 'center',
-        bottom: 0,
+        top: 20,
         flex: 1,
         margin: 4,
-        position: 'absolute'
+        position: 'absolute',
+        zIndex: 999
     },
 
     /**
@@ -30,10 +31,13 @@ export default {
      * thumbnails in a row at the bottom of the screen.
      */
     filmstripNarrow: {
+        top: 50,
+        right: 10,
         flexDirection: 'row',
         flexGrow: 0,
         justifyContent: 'flex-end',
-        height: FILMSTRIP_SIZE
+        height: 153,
+        zIndex: 999
     },
 
     /**
@@ -44,12 +48,12 @@ export default {
      * to {@code FILMSTRIP_SIZE}.
      */
     filmstripWide: {
-        bottom: 0,
+        top: 0,
         flexDirection: 'column',
         flexGrow: 0,
         position: 'absolute',
         right: 0,
-        top: 0
+        zIndex: 999
     },
 
     /**
@@ -60,7 +64,8 @@ export default {
         alignSelf: 'stretch',
         aspectRatio: 1,
         flexShrink: 0,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        width: 103
     },
 
     moderatorIndicatorContainer: {
@@ -86,14 +91,14 @@ export default {
         borderColor: '#424242',
         borderRadius: 3,
         borderStyle: 'solid',
-        borderWidth: 1,
+        borderWidth: 0,
         flex: 1,
-        height: 80,
+        height: 153,
         justifyContent: 'center',
-        margin: 2,
+        margin: 0,
         overflow: 'hidden',
         position: 'relative',
-        width: 80
+        width: 103
     },
 
     /**
@@ -123,16 +128,17 @@ export default {
     },
 
     tileView: {
-        alignSelf: 'center'
+        top: 86,
+        alignSelf: 'flex-start'
     },
 
     tileViewRows: {
-        justifyContent: 'center'
+        justifyContent: 'flex-start'
     },
 
     tileViewRow: {
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'flex-start'
     }
 };
 

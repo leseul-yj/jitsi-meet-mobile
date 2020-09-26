@@ -1,7 +1,7 @@
 /**
  * The application's definition of the default color black.
  */
-const BLACK = '#111111';
+const BLACK = '#365E83';
 
 /**
  * The application's color palette.
@@ -30,6 +30,7 @@ export const ColorPalette = {
     transparent: 'rgba(0, 0, 0, 0)',
     warning: 'rgb(215, 121, 118)',
     white: '#FFFFFF',
+    videoBlue: '#365E83',
 
     /**
      * These are colors from the atlaskit to be used on mobile, when needed.

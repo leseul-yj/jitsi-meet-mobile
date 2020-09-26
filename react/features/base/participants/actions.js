@@ -412,6 +412,7 @@ export function participantMutedUs(participant) {
         if (!participant) {
             return;
         }
+        console.log("participantMutedUs")
 
         dispatch(showNotification({
             descriptionKey: 'notify.mutedRemotelyDescription',
@@ -439,7 +440,7 @@ export function participantKicked(kicker, kicked) {
             kicked: kicked.getId(),
             kicker: kicker.getId()
         });
-
+        
         dispatch(showNotification({
             titleArguments: {
                 kicked:

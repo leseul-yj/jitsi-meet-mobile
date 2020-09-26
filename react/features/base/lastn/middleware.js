@@ -67,7 +67,7 @@ function _updateLastN({ getState }) {
 
         return;
     }
-
+    console.log("participantCount"+participantCount)
     const defaultLastN = typeof config.channelLastN === 'undefined' ? -1 : config.channelLastN;
     let lastN = defaultLastN;
 

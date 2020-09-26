@@ -27,7 +27,6 @@ import AudioMutedIndicator from './AudioMutedIndicator';
 import DominantSpeakerIndicator from './DominantSpeakerIndicator';
 import ModeratorIndicator from './ModeratorIndicator';
 import RaisedHandIndicator from './RaisedHandIndicator';
-import ScreenShareIndicator from './ScreenShareIndicator';
 import VideoMutedIndicator from './VideoMutedIndicator';
 import styles, { AVATAR_SIZE } from './styles';
 
@@ -187,10 +186,9 @@ function Thumbnail(props: Props) {
             { !participant.isFakeParticipant && <Container style = { styles.thumbnailIndicatorContainer }>
                 { audioMuted
                     && <AudioMutedIndicator /> }
+
                 { videoMuted
                     && <VideoMutedIndicator /> }
-                { isScreenShare
-                    && <ScreenShareIndicator /> }
             </Container> }
 
         </Container>
@@ -216,12 +214,13 @@ function _mapDispatchToProps(dispatch: Function, ownProps): Object {
          * @returns {void}
          */
         _onClick() {
-            const { participant, tileView } = ownProps;
-
+            const { participant, tileView ,_onClick} = ownProps;
+            console.log("participant.pinned" + _onClick)
             if (tileView) {
                 dispatch(toggleToolboxVisible());
             } else {
                 dispatch(pinParticipant(participant.pinned ? null : participant.id));
+                _onClick && _onClick()
             }
         },
 

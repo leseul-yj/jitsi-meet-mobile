@@ -28,11 +28,10 @@ class LocalThumbnail extends Component<Props> {
      * @inheritdoc
      */
     render() {
-        const { _localParticipant } = this.props;
-
+        const { _localParticipant,_onClick } = this.props;
         return (
             <View style = { styles.localThumbnail }>
-                <Thumbnail participant = { _localParticipant } />
+                <Thumbnail participant = { _localParticipant } _onClick = {_onClick} />
             </View>
         );
     }

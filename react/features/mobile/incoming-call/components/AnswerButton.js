@@ -24,6 +24,7 @@ class AnswerButton extends AbstractButton<Props, *> {
     accessibilityLabel = 'incomingCall.answer';
     icon = IconHangup;
     label = 'incomingCall.answer';
+    styles = {'background':'#ffff00'}
 
     /**
      * Handles clicking / pressing the button, and answers the incoming call.

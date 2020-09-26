@@ -5,7 +5,7 @@ import { ColorPalette } from '../../../base/styles';
 export default {
     displayNameBackdrop: {
         alignSelf: 'center',
-        backgroundColor: 'rgba(28, 32, 37, 0.6)',
+        backgroundColor: 'rgba(28, 32, 37, .0)',
         borderRadius: 4,
         paddingHorizontal: 16,
         paddingVertical: 4
@@ -13,6 +13,6 @@ export default {
 
     displayNameText: {
         color: ColorPalette.white,
-        fontSize: 14
+        fontSize: 30
     }
 };

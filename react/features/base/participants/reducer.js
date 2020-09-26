@@ -197,7 +197,15 @@ function _participantJoined({ participant }) {
         role
     } = participant;
     let { conference, id } = participant;
+    if(name){
+        console.log("_participantJoined"+name);
+        console.log("_participantJoined"+local);
+    }else{
+        console.log("_participantJoined"+name);
+        console.log("_participantJoined"+local);
 
+    }
+    
     if (local) {
         // conference
         //

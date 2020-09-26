@@ -44,7 +44,8 @@ class VideoQualityLabel extends AbstractVideoQualityLabel<Props> {
             // We don't have info about the quality so no need for the indicator
             return null;
         }
-
+        // 去掉AUD提示
+        return null
         return (
             <CircularLabel
                 label = { t('videoStatus.audioOnly') }

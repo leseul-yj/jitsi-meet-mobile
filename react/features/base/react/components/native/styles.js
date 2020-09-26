@@ -205,7 +205,7 @@ const SECTION_LIST_STYLES = {
 
 export const TINTED_VIEW_DEFAULT = {
     backgroundColor: ColorPalette.appBackground,
-    opacity: 0.8
+    opacity: 1
 };
 
 /**

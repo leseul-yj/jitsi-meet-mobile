@@ -100,9 +100,10 @@ class TileView extends Component<Props> {
      * @returns {ReactElement}
      */
     render() {
-        const { _height, _width, onClick } = this.props;
+        const { _height, _width, onClick , _participants} = this.props;
+        console.log("_getColumnCount"+this._getColumnCount())
         const rowElements = this._groupIntoRows(this._renderThumbnails(), this._getColumnCount());
-
+        console.log("tileView_width"+_width);
         return (
             <ScrollView
                 style = {{
@@ -133,6 +134,10 @@ class TileView extends Component<Props> {
     _getColumnCount() {
         const participantCount = this.props._participants.length;
 
+        if (participantCount === 5 || participantCount === 6) {
+            // In wide view, a four person call should display as a 2x3 grid.
+            return 3;
+        }
         // For narrow view, tiles should stack on top of each other for a lonely
         // call and a 1:1 call. Otherwise tiles should be grouped into rows of
         // two.
@@ -140,7 +145,7 @@ class TileView extends Component<Props> {
             return participantCount >= 3 ? 2 : 1;
         }
 
-        if (participantCount === 4) {
+        if (participantCount === 4 || participantCount === 5 || participantCount === 6) {
             // In wide view, a four person call should display as a 2x2 grid.
             return 2;
         }
@@ -181,14 +186,18 @@ class TileView extends Component<Props> {
         const { _height, _participants, _width } = this.props;
         const columns = this._getColumnCount();
         const participantCount = _participants.length;
-        const heightToUse = _height - (MARGIN * 2);
-        const widthToUse = _width - (MARGIN * 2);
+        // const heightToUse = _height - (MARGIN * 2);
+        // const widthToUse = _width - (MARGIN * 2);
+        const heightToUse = _height ;
+        const widthToUse = _width;
         let tileWidth;
-
+        
         // If there is going to be at least two rows, ensure that at least two
         // rows display fully on screen.
+        console.log("participantCount / columns == "+participantCount / columns)
         if (participantCount / columns > 1) {
             tileWidth = Math.min(widthToUse / columns, heightToUse / 2);
+            console.log("tileWidth == "+tileWidth)
         } else {
             tileWidth = Math.min(widthToUse / columns, heightToUse);
         }
@@ -210,16 +219,23 @@ class TileView extends Component<Props> {
      * @returns {ReactElement[]}
      */
     _groupIntoRows(thumbnails, rowLength) {
+        console.log("rowLength"+rowLength)
         const rowElements = [];
+        const pos = this.props._participants.length === 3 ? 'center' : 'flex-start';
 
+        // console.log("pos" + pos);
+        // console.log("_participants" + _participants);
         for (let i = 0; i < thumbnails.length; i++) {
             if (i % rowLength === 0) {
                 const thumbnailsInRow = thumbnails.slice(i, i + rowLength);
-
+                //{ ...styles.tileViewRow,...{"justifyContent":pos} }
                 rowElements.push(
                     <View
                         key = { rowElements.length }
-                        style = { styles.tileViewRow }>
+                        style = {{
+                            ...styles.tileViewRow,
+                            justifyContent: pos
+                        }}>
                         { thumbnailsInRow }
                     </View>
                 );
@@ -250,7 +266,7 @@ class TileView extends Component<Props> {
                     disableTint = { true }
                     key = { participant.id }
                     participant = { participant }
-                    renderDisplayName = { true }
+                    renderDisplayName = { false }
                     styleOverrides = { styleOverrides }
                     tileView = { true } />));
     }

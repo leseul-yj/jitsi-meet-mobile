@@ -228,6 +228,9 @@ export default class AbstractButton<P: Props, S: *> extends Component<P, S> {
         return false;
     }
 
+    _getVisable(){
+        return true;
+    }
     /**
      * Helper function to be implemented by subclasses, which must return a
      * {@code boolean} value indicating if this button is toggled or not or
@@ -272,7 +275,8 @@ export default class AbstractButton<P: Props, S: *> extends Component<P, S> {
             label: this._getLabel(),
             styles: this._getStyles(),
             toggled: this._isToggled(),
-            tooltip: this._getTooltip()
+            tooltip: this._getTooltip(),
+            visible: this._getVisable()
         };
 
         return (

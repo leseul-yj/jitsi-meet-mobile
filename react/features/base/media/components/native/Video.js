@@ -80,6 +80,7 @@ export default class Video extends Component<Props> {
      * @returns {ReactElement|null}
      */
     render() {
+        // debugger;
         const { onPress, stream, zoomEnabled } = this.props;
 
         if (stream) {

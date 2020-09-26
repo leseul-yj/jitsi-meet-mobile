@@ -2,7 +2,6 @@
 
 import type { Dispatch } from 'redux';
 
-import { API_ID } from '../../../modules/API/constants';
 import { setRoom } from '../base/conference';
 import {
     configWillLoad,
@@ -24,7 +23,6 @@ import {
     parseURIString,
     toURLString
 } from '../base/util';
-import { isVpaasMeeting } from '../billing-counter/functions';
 import { clearNotifications, showNotification } from '../notifications';
 import { setFatalError } from '../overlay';
 
@@ -170,11 +168,9 @@ export function redirectWithStoredParams(pathname: string) {
  * window.location.pathname. If the specified pathname is relative, the context
  * root of the Web app will be prepended to the specified pathname before
  * assigning it to window.location.pathname.
- * @param {string} hashParam - Optional hash param to assign to
- * window.location.hash.
  * @returns {Function}
  */
-export function redirectToStaticPage(pathname: string, hashParam: ?string) {
+export function redirectToStaticPage(pathname: string) {
     return () => {
         const windowLocation = window.location;
         let newPathname = pathname;
@@ -186,10 +182,6 @@ export function redirectToStaticPage(pathname: string, hashParam: ?string) {
             newPathname.startsWith('./')
                 && (newPathname = newPathname.substring(2));
             newPathname = getLocationContextRoot(windowLocation) + newPathname;
-        }
-
-        if (hashParam) {
-            windowLocation.hash = hashParam;
         }
 
         windowLocation.pathname = newPathname;
@@ -292,13 +284,7 @@ export function maybeRedirectToWelcomePage(options: Object = {}) {
 
         // if close page is enabled redirect to it, without further action
         if (enableClosePage) {
-            if (isVpaasMeeting(getState())) {
-                redirectToStaticPage('/');
-            }
-
             const { isGuest, jwt } = getState()['features/base/jwt'];
-
-            let hashParam;
 
             // save whether current user is guest or not, and pass auth token,
             // before navigating to close page
@@ -308,15 +294,12 @@ export function maybeRedirectToWelcomePage(options: Object = {}) {
             let path = 'close.html';
 
             if (interfaceConfig.SHOW_PROMOTIONAL_CLOSE_PAGE) {
-                if (Number(API_ID) === API_ID) {
-                    hashParam = `#jitsi_meet_external_api_id=${API_ID}`;
-                }
                 path = 'close3.html';
             } else if (!options.feedbackSubmitted) {
                 path = 'close2.html';
             }
 
-            dispatch(redirectToStaticPage(`static/${path}`, hashParam));
+            dispatch(redirectToStaticPage(`static/${path}`));
 
             return;
         }

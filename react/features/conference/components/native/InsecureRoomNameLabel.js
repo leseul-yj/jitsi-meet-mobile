@@ -19,6 +19,8 @@ class InsecureRoomNameLabel extends AbstractInsecureRoomNameLabel {
      * @inheritdoc
      */
     _render() {
+        // 去掉会议名称不安全提示
+        return null;
         return (
             <CircularLabel
                 icon = { IconWarning }

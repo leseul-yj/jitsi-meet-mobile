@@ -24,7 +24,7 @@ export default createStyleSheet({
      * Style for the {@code Icon} element in a row.
      */
     deviceIcon: {
-        color: ColorPalette.white,
+        color: ColorPalette.blue,
         fontSize: 24
     },
 

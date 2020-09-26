@@ -6,11 +6,10 @@ import type { Dispatch } from 'redux';
 
 import { createToolbarEvent, sendAnalytics } from '../../analytics';
 import { setAudioOnly } from '../../base/audio-only';
+import { VIDEO_QUALITY_LEVELS, setPreferredVideoQuality } from '../../base/conference';
 import { translate } from '../../base/i18n';
 import JitsiMeetJS from '../../base/lib-jitsi-meet';
 import { connect } from '../../base/redux';
-import { setPreferredVideoQuality } from '../actions';
-import { VIDEO_QUALITY_LEVELS } from '../constants';
 import logger from '../logger';
 
 const {
@@ -316,13 +315,10 @@ class VideoQualitySlider extends Component<Props> {
             return _sliderOptions.indexOf(audioOnlyOption);
         }
 
-        for (let i = 0; i < _sliderOptions.length; i++) {
-            if (_sliderOptions[i].videoQuality >= _sendrecvVideoQuality) {
-                return i;
-            }
-        }
+        const matchingOption = _sliderOptions.find(
+            ({ videoQuality }) => videoQuality === _sendrecvVideoQuality);
 
-        return -1;
+        return _sliderOptions.indexOf(matchingOption);
     }
 
     _onSliderChange: () => void;
@@ -384,8 +380,7 @@ class VideoQualitySlider extends Component<Props> {
  */
 function _mapStateToProps(state) {
     const { enabled: audioOnly } = state['features/base/audio-only'];
-    const { p2p } = state['features/base/conference'];
-    const { preferredVideoQuality } = state['features/video-quality'];
+    const { p2p, preferredVideoQuality } = state['features/base/conference'];
 
     return {
         _audioOnly: audioOnly,

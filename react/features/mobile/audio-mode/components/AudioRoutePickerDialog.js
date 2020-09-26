@@ -12,7 +12,8 @@ import {
     IconDeviceBluetooth,
     IconDeviceEarpiece,
     IconDeviceHeadphone,
-    IconDeviceSpeaker
+    IconSpeaker,
+    IconChangeCamera
 } from '../../../base/icons';
 import { connect } from '../../../base/redux';
 import { ColorPalette, type StyleType } from '../../../base/styles';
@@ -136,7 +137,12 @@ const deviceInfoMap = {
         type: 'HEADPHONES'
     },
     SPEAKER: {
-        icon: IconDeviceSpeaker,
+        icon: IconSpeaker,
+        text: 'audioDevices.speaker',
+        type: 'SPEAKER'
+    },
+    CHANGECAMERA: {
+        icon: IconChangeCamera,
         text: 'audioDevices.speaker',
         type: 'SPEAKER'
     }
@@ -186,6 +192,7 @@ class AudioRoutePickerDialog extends Component<Props, State> {
                     uid: device.uid
                 };
 
+                console.log(`device.selected${info.text}+${device.selected}`)
                 audioDevices.push(info);
             }
         }
@@ -207,7 +214,7 @@ class AudioRoutePickerDialog extends Component<Props, State> {
 
         // Bind event handlers so they are only bound once per instance.
         this._onCancel = this._onCancel.bind(this);
-
+        console.log("audioRoutePickerDialog")
         // Trigger an initial update.
         AudioMode.updateDeviceList && AudioMode.updateDeviceList();
     }

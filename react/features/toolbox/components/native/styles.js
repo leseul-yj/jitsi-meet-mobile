@@ -2,8 +2,9 @@
 
 import { ColorSchemeRegistry, schemeColor } from '../../../base/color-scheme';
 import { BoxModel, ColorPalette } from '../../../base/styles';
+import { getRGBAFormat } from '../../../base/styles/functions.any';
 
-const BUTTON_SIZE = 50;
+const BUTTON_SIZE = 66;
 
 // Toolbox, toolbar:
 
@@ -11,14 +12,14 @@ const BUTTON_SIZE = 50;
  * The style of toolbar buttons.
  */
 const toolbarButton = {
-    backgroundColor: schemeColor('button'),
+    // backgroundColor: schemeColor('buttonToggled'),
     borderRadius: BUTTON_SIZE / 2,
     borderWidth: 0,
     flex: 0,
     flexDirection: 'row',
     height: BUTTON_SIZE,
     justifyContent: 'center',
-
+    //borderColor: 'rgba(255, 255, 255, 0.7)',
     // XXX We probably tested BoxModel.margin and discovered it to be too small
     // for our taste.
     marginHorizontal: 7,
@@ -30,16 +31,16 @@ const toolbarButton = {
  */
 const toolbarButtonIcon = {
     alignSelf: 'center',
-    color: ColorPalette.darkGrey,
-    fontSize: 22
+    color: ColorPalette.white,
+    fontSize: BUTTON_SIZE
 };
 
 /**
  * The style of toolbar buttons which display white icons.
  */
 const whiteToolbarButton = {
-    ...toolbarButton,
-    backgroundColor: schemeColor('buttonToggled')
+    ...toolbarButton
+    // backgroundColor: schemeColor('buttonToggled')
 };
 
 /**
@@ -69,14 +70,17 @@ const styles = {
 
     /**
      * The style of the toolbar.
+     * 底部toolbar样式
      */
     toolbar: {
         alignItems: 'center',
         flexDirection: 'row',
         flexGrow: 0,
-        justifyContent: 'center',
-        marginBottom: BoxModel.margin / 2,
+        justifyContent: 'space-around',
+        marginBottom: 38,
+        //marginBottom: BoxModel.margin / 2,
         paddingHorizontal: BoxModel.margin
+        // backgroundColor: '#365E83'
     },
 
     /**
@@ -116,17 +120,19 @@ ColorSchemeRegistry.register('Toolbox', {
      */
     chatButtonOverride: {
         toggled: {
-            backgroundColor: ColorPalette.blue
+            backgroundColor: ColorPalette.white
         }
     },
-
+    
+    // 挂断icon
     hangupButtonStyles: {
         iconStyle: whiteToolbarButtonIcon,
         style: {
             ...toolbarButton,
-            backgroundColor: schemeColor('hangup')
+            // borderColor: '#01c384',
+            // backgroundColor: '#01c384'
         },
-        underlayColor: ColorPalette.buttonUnderlay
+        // underlayColor: ColorPalette.buttonUnderlay
     },
 
     /**

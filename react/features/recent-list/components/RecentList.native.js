@@ -87,7 +87,6 @@ class RecentList extends AbstractRecentList<Props> {
             onPress: this._onShowDialInInfo,
             text: t('welcomepage.info')
         }, {
-            backgroundColor: 'red',
             onPress: this._onDelete,
             text: t('welcomepage.recentListDelete')
         } ];

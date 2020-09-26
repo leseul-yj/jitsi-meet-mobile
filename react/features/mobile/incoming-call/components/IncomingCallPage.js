@@ -66,9 +66,9 @@ class IncomingCallPage extends Component<Props> {
                         source = {{ uri: this.props._callerAvatarURL }}
                         style = { styles.backgroundAvatarImage } />
                 </View>
-                <LinearGradient
+                {/* <LinearGradient
                     colors = { BACKGROUND_OVERLAY_GRADIENT }
-                    style = { styles.backgroundOverlayGradient } />
+                    style = { styles.backgroundOverlayGradient } /> */}
                 <Text style = { styles.title }>
                     { callTitle }
                 </Text>

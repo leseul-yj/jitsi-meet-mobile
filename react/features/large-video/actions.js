@@ -35,6 +35,7 @@ export function selectParticipant() {
                 : [ state['features/large-video'].participantId ];
 
             try {
+                console.log("ids"+ids)
                 conference.selectParticipants(ids);
             } catch (err) {
                 _handleParticipantError(err);
@@ -121,14 +122,14 @@ function _electParticipantInLargeVideo(state) {
     const participants = state['features/base/participants'];
     let participant = participants.find(p => p.pinned);
     let id = participant && participant.id;
-
+    
     if (!id) {
         // 2. No participant is pinned so get the dominant speaker. But the
         //    local participant won't be displayed in LargeVideo even if she is
         //    the dominant speaker.
         participant = participants.find(p => p.dominantSpeaker && !p.local);
         id = participant && participant.id;
-
+        
         if (!id) {
             // 3. There is no dominant speaker so select the remote participant
             //    who last had visible video.
@@ -153,8 +154,9 @@ function _electParticipantInLargeVideo(state) {
                     const p = participants[i - 1];
 
                     !p.botType && (participant = p);
+                    
                 }
-
+                //console.log("_electParticipantInLargeVideo"+JSON.stringify(participant))
                 id = participant && participant.id;
             }
         }

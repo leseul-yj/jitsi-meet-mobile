@@ -145,7 +145,7 @@ function _isMaybeSplitBrainError(getState, action) {
 function _navigate({ getState }) {
     const state = getState();
     const { app } = state['features/base/app'];
-
+    console.log("route")
     _getRouteToRender(state).then(route => app._navigate(route));
 }
 

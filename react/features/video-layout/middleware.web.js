@@ -42,6 +42,7 @@ MiddlewareRegistry.register(store => next => action => {
         break;
 
     case PARTICIPANT_JOINED:
+        console.log("layout")
         if (!action.participant.local) {
             VideoLayout.addRemoteParticipantContainer(
                 getParticipantById(store.getState(), action.participant.id));

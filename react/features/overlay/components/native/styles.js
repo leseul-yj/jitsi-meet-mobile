@@ -19,7 +19,7 @@ export default {
      */
     container: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: ColorPalette.black
+        backgroundColor: ColorPalette.videoBlue
     },
 
     loadingOverlayText: {

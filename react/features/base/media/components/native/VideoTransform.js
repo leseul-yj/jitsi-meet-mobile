@@ -214,6 +214,7 @@ class VideoTransform extends Component<Props, State> {
      * @inheritdoc
      */
     render() {
+        debugger;
         const { children, style } = this.props;
 
         return (

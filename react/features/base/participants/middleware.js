@@ -361,7 +361,7 @@ function _maybePlaySounds({ getState, dispatch }, action) {
  */
 function _participantJoinedOrUpdated({ dispatch, getState }, next, action) {
     const { participant: { avatarURL, e2eeEnabled, email, id, local, name, raisedHand } } = action;
-
+    console.log("11111111")
     // Send an external update of the local participant's raised hand state
     // if a new raised hand state is defined in the action.
     if (typeof raisedHand !== 'undefined') {

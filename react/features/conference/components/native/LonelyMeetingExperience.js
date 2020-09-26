@@ -86,7 +86,7 @@ class LonelyMeetingExperience extends PureComponent<Props> {
                         onPress = { this._onPress }
                         style = { [
                             styles.lonelyButton,
-                            _styles.lonelyButton
+                            //_styles.lonelyButton
                         ] }>
                         <Icon
                             size = { 24 }

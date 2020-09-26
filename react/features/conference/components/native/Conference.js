@@ -246,7 +246,6 @@ class Conference extends AbstractConference<Props, *> {
         if (_reducedUI) {
             return this._renderContentForReducedUi();
         }
-
         return (
             <>
                 {/*
@@ -255,6 +254,10 @@ class Conference extends AbstractConference<Props, *> {
                     _shouldDisplayTileView
                         ? <TileView onClick = { this._onClick } />
                         : <LargeVideo onClick = { this._onClick } />
+                }
+
+                {
+                     _shouldDisplayTileView ? null: <Filmstrip />
                 }
 
                 {/*
@@ -273,11 +276,11 @@ class Conference extends AbstractConference<Props, *> {
                         </TintedView>
                 }
 
-                <SafeAreaView
+                {<SafeAreaView
                     pointerEvents = 'box-none'
                     style = { styles.toolboxAndFilmstripContainer }>
 
-                    { showGradient && <LinearGradient
+                    {/* { showGradient && <LinearGradient
                         colors = { NAVBAR_GRADIENT_COLORS }
                         end = {{
                             x: 0.0,
@@ -291,15 +294,15 @@ class Conference extends AbstractConference<Props, *> {
                         style = { [
                             styles.bottomGradient,
                             applyGradientStretching ? styles.gradientStretchBottom : undefined
-                        ] } />}
+                        ] } />} */}
 
                     <Labels />
 
                     <Captions onPress = { this._onClick } />
-
-                    { _shouldDisplayTileView || <Container style = { styles.displayNameContainer }>
+                    {/* 去掉底部的name */}
+                    {/* { _shouldDisplayTileView || <Container style = { styles.displayNameContainer }>
                         <DisplayNameLabel participantId = { _largeVideoParticipantId } />
-                    </Container> }
+                    </Container> } */}
 
                     <LonelyMeetingExperience />
 
@@ -316,14 +319,17 @@ class Conference extends AbstractConference<Props, *> {
                       * React Components depict the videos of the conference's
                       * participants.
                       */
-                        _shouldDisplayTileView ? undefined : <Filmstrip />
+                       
                     }
-                </SafeAreaView>
+                </SafeAreaView> }
 
                 <SafeAreaView
                     pointerEvents = 'box-none'
                     style = { styles.navBarSafeView }>
-                    <NavigationBar />
+                    {
+                        !_shouldDisplayTileView
+                        ?<NavigationBar />:null
+                    }
                     { this._renderNotificationsContainer() }
                     <KnockingParticipantList />
                 </SafeAreaView>

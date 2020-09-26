@@ -2,7 +2,8 @@ import { ColorSchemeRegistry, schemeColor } from '../../../base/color-scheme';
 import { BoxModel, ColorPalette, fixAndroidViewClipping } from '../../../base/styles';
 import { FILMSTRIP_SIZE } from '../../../filmstrip';
 
-export const NAVBAR_GRADIENT_COLORS = [ '#000000FF', '#00000000' ];
+// 上下阴影遮罩渐变
+export const NAVBAR_GRADIENT_COLORS = [ '#365E83', '#365E83' ];
 export const INSECURE_ROOM_NAME_LABEL_COLOR = ColorPalette.warning;
 
 // From brand guideline
@@ -29,7 +30,7 @@ export default {
      */
     conference: fixAndroidViewClipping({
         alignSelf: 'stretch',
-        backgroundColor: ColorPalette.appBackground,
+        backgroundColor: ColorPalette.videoBlue,
         flex: 1
     }),
 
@@ -74,7 +75,7 @@ export default {
         flexDirection: 'column',
         position: 'absolute',
         right: 0,
-        top: 0
+        top: 80
     },
 
     lonelyButton: {
@@ -83,14 +84,17 @@ export default {
         flexDirection: 'row',
         height: 48,
         justifyContent: 'space-around',
-        paddingHorizontal: 12
+        paddingHorizontal: 12,
+        backgroundColor: ColorPalette.green
     },
 
     lonelyButtonComponents: {
-        marginHorizontal: 6
+        marginHorizontal: 6,
+        backgroundColor: ColorPalette.green
     },
 
     lonelyMeetingContainer: {
+        display: 'none',
         alignSelf: 'stretch',
         alignItems: 'center',
         padding: BoxModel.padding * 2
@@ -102,7 +106,7 @@ export default {
 
     navBarButton: {
         iconStyle: {
-            color: ColorPalette.white,
+            color: ColorPalette.red,
             fontSize: 24
         },
 
@@ -114,34 +118,37 @@ export default {
         left: 0,
         position: 'absolute',
         right: 0,
-        top: 0
+        top: 20
     },
 
     navBarSafeView: {
         left: 0,
         position: 'absolute',
         right: 0,
-        top: 0
+        top: 0,
+        zINdex: 10
     },
 
     navBarWrapper: {
+        top: 121,
         alignItems: 'center',
         flex: 1,
         flexDirection: 'row',
         height: 44,
-        justifyContent: 'space-between',
-        paddingHorizontal: 14
+        justifyContent: 'center',
+        paddingHorizontal: 14,
+        zIndex: 1,
     },
 
     roomTimer: {
         color: ColorPalette.white,
         fontSize: 15,
-        opacity: 0.6
+        opacity: 1
     },
 
     roomName: {
         color: ColorPalette.white,
-        fontSize: 17,
+        fontSize: 40,
         fontWeight: '400'
     },
 

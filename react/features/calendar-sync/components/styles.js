@@ -101,7 +101,7 @@ export default createStyleSheet({
      * Color for already ongoing meeting notifications.
      */
     notificationContentPast: {
-        backgroundColor: 'red'
+        
     },
 
     /**

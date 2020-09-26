@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import { View ,TouchableOpacity} from 'react-native';
 import { ScrollView } from 'react-native';
 
 import { Container, Platform } from '../../../base/react';
@@ -37,19 +38,26 @@ type Props = {
      */
     _visible: boolean
 };
+type State = {
 
+    /**
+     * 小窗口是否显示自己
+     */ 
+    _isShowMySmallVideo: boolean
+};
 /**
  * Implements a React {@link Component} which represents the filmstrip on
  * mobile/React Native.
  *
  * @extends Component
  */
-class Filmstrip extends Component<Props> {
+class Filmstrip extends Component<Props, State> {
     /**
      * Whether the local participant should be rendered separately from the
      * remote participants i.e. outside of their {@link ScrollView}.
      */
     _separateLocalThumbnail: boolean;
+
 
     /**
      * Constructor of the component.
@@ -77,8 +85,26 @@ class Filmstrip extends Component<Props> {
         // do not have much of a choice but to continue rendering LocalThumbnail
         // as any other remote Thumbnail on Android.
         this._separateLocalThumbnail = Platform.OS !== 'android';
+
+        this.state = {
+            _isShowMySmallVideo: true
+        };
+        this.tranRef = React.createRef();
+        this._onClick = this._onClick.bind(this);
     }
 
+
+    _onClick() {
+        const newValue = !this.state._isShowMySmallVideo;
+        console.log("filmOnClick" + this.state._isShowMySmallVideo)
+        this.setState({
+            _isShowMySmallVideo: newValue
+        })
+    }
+
+    componentDidMount(){
+
+    }
     /**
      * Implements React's {@link Component#render()}.
      *
@@ -86,7 +112,7 @@ class Filmstrip extends Component<Props> {
      * @returns {ReactElement}
      */
     render() {
-        const { _aspectRatio, _enabled, _participants, _visible } = this.props;
+        const { _aspectRatio, _enabled, _participants, _visible, _participantId } = this.props;
 
         if (!_enabled) {
             return null;
@@ -94,44 +120,55 @@ class Filmstrip extends Component<Props> {
 
         const isNarrowAspectRatio = _aspectRatio === ASPECT_RATIO_NARROW;
         const filmstripStyle = isNarrowAspectRatio ? styles.filmstripNarrow : styles.filmstripWide;
-
+        console.log("filmstrip" + _visible)
         return (
             <Container
                 style = { filmstripStyle }
-                visible = { _visible }>
-                {
+                visible = { _visible }   
+                ref = { this.tranRef }
+            >
+                <TouchableOpacity     
+                    
+                    >
+                {/* {
                     this._separateLocalThumbnail
                         && !isNarrowAspectRatio
                         && <LocalThumbnail />
-                }
+                } */}
                 <ScrollView
                     horizontal = { isNarrowAspectRatio }
                     showsHorizontalScrollIndicator = { false }
                     showsVerticalScrollIndicator = { false }
                     style = { styles.scrollView } >
-                    {
+                    {/* {
                         !this._separateLocalThumbnail && !isNarrowAspectRatio
                             && <LocalThumbnail />
-                    }
+                    } */}
                     {
-
+                        !this.state._isShowMySmallVideo &&
                         this._sort(_participants, isNarrowAspectRatio)
-                            .map(p => (
-                                <Thumbnail
-                                    key = { p.id }
-                                    participant = { p } />))
-
+                            .map((p, i) => {
+                            console.log("filmstrip333"+p.id);
+                            console.log("filmstrip444"+_participantId);
+                            console.log("filmstrip222:"+i);
+                            return (<Thumbnail
+                                key = { p.id }
+                                participant = { p } 
+                                _onClick = {this._onClick}/>)
+                        })
                     }
-                    {
+                    {/* {
                         !this._separateLocalThumbnail && isNarrowAspectRatio
                             && <LocalThumbnail />
-                    }
+                    } */}
                 </ScrollView>
                 {
-                    this._separateLocalThumbnail && isNarrowAspectRatio
-                        && <LocalThumbnail />
+                    this.state._isShowMySmallVideo && isNarrowAspectRatio
+                        && <LocalThumbnail _onClick = {this._onClick}/>
                 }
+                </TouchableOpacity>
             </Container>
+         
         );
     }
 
@@ -158,7 +195,7 @@ class Filmstrip extends Component<Props> {
             // When the narrow aspect ratio is used, we want to have the remote
             // participants from right to left with the newest added/joined to
             // the leftmost side. The local participant is the leftmost item.
-            sortedParticipants.reverse();
+            //sortedParticipants.reverse();
         }
 
         return sortedParticipants;
@@ -175,12 +212,16 @@ class Filmstrip extends Component<Props> {
 function _mapStateToProps(state) {
     const participants = state['features/base/participants'];
     const { enabled } = state['features/filmstrip'];
+    const participantId = state['features/large-video'].participantId;
 
+    console.log("filmstrip1111" + participantId);
+    console.log("filmstrip222" + participants.length);
     return {
         _aspectRatio: state['features/base/responsive-ui'].aspectRatio,
         _enabled: enabled,
-        _participants: participants.filter(p => !p.local),
-        _visible: isFilmstripVisible(state)
+        _participants: participants.filter(p => !p.local),//participants.filter(p => !p.local),
+        _visible: isFilmstripVisible(state),
+        _participantId: participantId
     };
 }
 

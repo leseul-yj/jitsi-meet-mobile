@@ -57,6 +57,7 @@ function _getMobileRoute(state): Promise<Route> {
     const route = _getEmptyRoute();
 
     if (isRoomValid(state['features/base/conference'].room)) {
+        console.log("toConference")
         route.component = Conference;
     } else if (isWelcomePageAppEnabled(state)) {
         route.component = WelcomePage;

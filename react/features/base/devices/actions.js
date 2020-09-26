@@ -296,6 +296,7 @@ export function setVideoInputDeviceAndUpdateSettings(deviceId) {
  * }}
  */
 export function updateDeviceList(devices) {
+    console.log(`updateDeviceList${JSON.stringify(updateDeviceList)}`)
     return {
         type: UPDATE_DEVICE_LIST,
         devices

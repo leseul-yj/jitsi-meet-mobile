@@ -1,5 +1,6 @@
 import { ColorPalette, createStyleSheet } from '../../../base/styles';
 
+// 线性渐变插件
 export const AVATAR_BORDER_GRADIENT = [ '#4C9AFF', '#0052CC' ];
 
 export const BACKGROUND_OVERLAY_GRADIENT = [ '#0052CC', '#4C9AFF' ];

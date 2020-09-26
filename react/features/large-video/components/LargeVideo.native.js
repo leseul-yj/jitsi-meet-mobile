@@ -116,7 +116,7 @@ class LargeVideo extends PureComponent<Props, State> {
             _styles,
             onClick
         } = this.props;
-
+        console.log("_participantId"+_participantId)
         return (
             <ParticipantView
                 avatarSize = { avatarSize }
@@ -140,6 +140,8 @@ class LargeVideo extends PureComponent<Props, State> {
  */
 function _mapStateToProps(state) {
     const { clientHeight: height, clientWidth: width } = state['features/base/responsive-ui'];
+    // 获取自己的信息
+    const participants = state['features/base/participants'];
 
     return {
         _height: height,

@@ -234,12 +234,12 @@ class ParticipantView extends Component<Props> {
                         zOrder = { this.props.zOrder }
                         zoomEnabled = { this.props.zoomEnabled } /> }
 
-                { !renderYoutubeLargeVideo && !renderVideo
+                {/* { !renderYoutubeLargeVideo && !renderVideo
                     && <View style = { styles.avatarContainer }>
                         <Avatar
                             participantId = { this.props.participantId }
                             size = { this.props.avatarSize } />
-                    </View> }
+                    </View> } */}
 
                 { useTint
 

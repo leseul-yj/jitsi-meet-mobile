@@ -24,6 +24,7 @@ class DeclineButton extends AbstractButton<Props, *> {
     accessibilityLabel = 'incomingCall.decline';
     icon = IconHangup;
     label = 'incomingCall.decline';
+    styles = {'background':'#ffff00'}
 
     /**
      * Handles clicking / pressing the button, and declines the incoming call.

@@ -57,6 +57,11 @@ class ToggleCameraButton extends AbstractButton<Props, *> {
     _isDisabled() {
         return this.props._audioOnly || this.props._videoMuted;
     }
+    
+    _getVisable(){
+        console.log("audio"+this.props._audioOnly)
+        return !(this.props._audioOnly);
+    }
 }
 
 /**

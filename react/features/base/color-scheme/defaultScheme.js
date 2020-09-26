@@ -33,7 +33,7 @@ export default {
         buttonLabel: ColorPalette.white
     },
     'Header': {
-        background: ColorPalette.blue,
+        background: ColorPalette.videoBlue,
         icon: ColorPalette.white,
         statusBar: ColorPalette.blueHighlight,
         statusBarContent: ColorPalette.white,
@@ -53,7 +53,7 @@ export default {
     },
     'Toolbox': {
         button: 'rgb(255, 255, 255)',
-        buttonToggled: 'rgb(38, 58, 76)',
+        buttonToggled: '#365E83',
         buttonToggledBorder: getRGBAFormat('#a4b8d1', 0.6),
         hangup: 'rgb(225, 45, 45)'
     }
